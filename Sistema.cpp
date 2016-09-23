@@ -49,9 +49,16 @@ void Sistema::setCantidad_atractivos(int cant_nueva)
     this->cantidad_atractivos = cant_nueva;
 }
 
-void Sistema::crearSitio (string nombre, int atractivo, double latitud, double longitud) {
-    Sitio sitio(nombre, atractivo, latitud, longitud);
-    l_sitios.push_back(sitio);
+bool Sistema::crearSitio (string nombre, int atractivo, double latitud, double longitud) {
+    if(latitud >= (2.95) && latitud <= (3.25) && longitud >= (-73.6) && longitud <= (-73.4))
+    {
+        Sitio sitio(nombre, atractivo, latitud, longitud);
+        l_sitios.push_back(sitio);
+        this->cantidad_sitios++;
+        return true;
+    }
+
+    return false;
 }
 
 string Sistema::leerArchivo(const char* archivo) {
