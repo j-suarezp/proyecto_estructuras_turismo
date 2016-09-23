@@ -21,7 +21,7 @@ class Sistema
         void setCantidad_sitios(int cant_nueva);
         int getCantidad_atractivos();
         void setCantidad_atractivos(int cant_nueva);
-        void crearSitio (string nombre, int atractivo, double latitud, double longitud);
+        bool crearSitio (string nombre, int atractivo, double latitud, double longitud);
         string leerArchivo(const char* archivo);
         void imprimirLista();
         int cantSitios (int atractivo);
