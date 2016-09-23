@@ -30,13 +30,13 @@ Sistema sistema;
             token = strtok(NULL, " ");
         }
 
-        if(comandos[0] == "cargar")
+        if(comandos[0] == "cargar" && comandos.size() == 2)
             opcion = 1;
-        if(comandos[0] == "cantSitios")
+        if(comandos[0] == "cantSitios" && comandos.size() < 3 )
             opcion = 2;
         if(comandos[0] == "obtenerSitio")
             opcion = 3;
-        if(comandos[0] == "crearSitio")
+        if(comandos[0] == "crearSitio" && comandos.size() == 5)
             opcion = 4;
         if(comandos[0] == "modificarSitio")
             opcion = 5;
@@ -48,12 +48,17 @@ Sistema sistema;
             case 1: {
                 const char* ruta = comandos[1].c_str();
                 cout<<comandos[1]<<sistema.leerArchivo(ruta)<<endl;
-                sistema.imprimirLista();
             }
                 break;
             case 2:
                 {
-
+                    if(comandos.size() == 1)
+                        cout<<"El sistema tiene "<<sistema.getCantidad_sitios()<<" sitios."<<endl;
+                    else
+                    {
+                        const char* param = comandos[1].c_str();
+                        cout<<"El sistema tiene "<<sistema.cantSitios(atoi(param))<<" sitios de tipo "<<comandos[1]<<endl;
+                    }
                 }
                 break;
             case 3:
@@ -63,6 +68,16 @@ Sistema sistema;
                 break;
             case 4:
                 {
+                    const char* p_atr = comandos[2].c_str();
+                    const char* p_lat = comandos[3].c_str();
+                    const char* p_lon = comandos[4].c_str();
+
+                    if (sistema.crearSitio(comandos[1], atoi(p_atr), atof(p_lat), atof(p_lon)))
+                    {
+                        cout<<"El sitio "<<comandos[1]<<" de tipo "<<atoi(p_atr)<<" en (["<<atof(p_lat)<<"], ["<<atof(p_lon)<<"]) ha sido creado."<<endl;
+                    }
+                    else
+                        cout<<"Ha ocurrido un error a la hora de crear el sitio."<<endl;
 
                 }
                 break;
